@@ -1,0 +1,32 @@
+User
+How to bind SonarCloud.io to created repository on github
+
+
+
+ChatGPT
+To bind SonarCloud to a repository on GitHub, you'll first need to ensure that you have the necessary permissions to administer the repository on GitHub, as well as the necessary permissions on SonarCloud. Here is a general guide:
+
+Create an Account on SonarCloud:
+
+Navigate to SonarCloud.io
+Click on the "Log in" button in the top right corner.
+You will have the option to sign up using your GitHub, Bitbucket, or Azure DevOps account. Choose GitHub.
+Connect SonarCloud to GitHub:
+
+Once you're logged into SonarCloud with your GitHub account, go to your account settings. You can find this by clicking on your avatar in the top right corner, then select "My Account".
+On the left-hand side of the settings page, choose "Security" under the GitHub section.
+Click on the "Connect" button. This will redirect you to GitHub where you'll need to authorize SonarCloud to access your account.
+Import Your Project:
+
+After your GitHub account is connected, you can import your project. Navigate to the "Projects" section.
+Click on the "+ New Project" button.
+Choose GitHub as the organization for your project, and then select the repository you want to analyze.
+Run Analysis:
+
+To make use of SonarCloud, you'll need to set up and run an analysis. This process differs depending on your project's language and build system, but SonarCloud provides a helpful tutorial for each individual project.
+Configure Your GitHub Repository:
+
+You'll also want to configure your repository on GitHub to take full advantage of SonarCloud's features. You can set up SonarCloud as a required status check for pull requests, and optionally enable comment summaries of analysis results.
+To do this, navigate to the "Settings" tab on your GitHub repository, then go to the "Branches" section. Click on the "Add rule" button.
+You'll be able to choose which branches this rule applies to, and add SonarCloud as a required status check.
+Remember, the steps might vary slightly depending on the specifics of your project and the current design of the SonarCloud and GitHub interfaces. Always follow the most recent guidelines provided by SonarCloud and GitHub.
