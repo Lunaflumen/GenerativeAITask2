@@ -455,3 +455,188 @@ var failingStudents = new List<Student>
     new Student { Age = 40, Grade = 51 }
 };
 Now, each collection contains 20 Student objects according to the different requirements you provided.
+
+
+
+
+
+
+There is a code with Player class and CalculateScore method this class:
+
+	public class Player
+	{
+		public string Name { get; set; }
+
+		public int Age { get; set; }
+
+		public int Experience { get; set; }
+
+		public List<int> Skills { get; set; }
+	}
+
+	public class PlayerAnalyzer
+	{
+		public double CalculateScore(List<Player> players)
+		{
+			double score = 0;
+
+			foreach (var player in players)
+			{
+				double skillsAverage = player.Skills.Sum() / (double)player.Skills.Count;
+				double contribution = player.Age * player.Experience * skillsAverage;
+
+				if (player.Age < 18)
+
+				{
+					contribution *= 0.5;
+				}
+
+				if (player.Experience > 10)
+				{
+					contribution *= 1.2;
+				}
+
+				score += contribution;
+			}
+
+			return score;
+		}
+	}
+	}
+	
+Create unit tests (using xUnit) that cover CalculateScore function. Cover following test cases 
+
+Positive Test Cases: 
+
+	Case 1: Normal Player 
+		Given an array with a single player object with age 25, experience 5 years, and skills [2, 2, 2], the function should return a score of 250 (since 2552 = 250). 
+
+	Case 2: Junior Player 
+		Given an array with a single player object with age 15, experience 3 years, and skills [3, 3, 3], the function should return a score of 67.5 (since (1533)*0.5 = 67.5). 
+
+	Case 3: Senior Player 
+		Given an array with a single player object with age 35, experience 15 years, and skills [4, 4, 4], the function should return a score of 2520 (since (35154)*1.2 = 2520). 
+
+	Case 4: Multiple Players 
+		Given an array with multiple player objects (create 20 objects, not one), the function should return the sum of their scores. 
+
+Negative Test Cases: 
+
+	Case 1: Skills is null 
+		Given an array with a player where Skills property is null, the function should throw an error 
+
+	Case 2: Empty Array 
+		Given an empty array, the function should return 0 (since there are no players to contribute to the score).  
+
+
+
+ChatGPT
+You can write unit tests in xUnit as follows. We will cover all of your described scenarios:
+
+using Xunit;
+using System.Collections.Generic;
+using System;
+
+public class PlayerAnalyzerTests
+{
+	[Fact]
+	public void CalculateScore_NormalPlayer_ReturnsCorrectScore()
+	{
+		// Arrange
+		var players = new List<Player>
+		{
+			new Player { Age = 25, Experience = 5, Skills = new List<int> {2, 2, 2} }
+		};
+		var analyzer = new PlayerAnalyzer();
+
+		// Act
+		var result = analyzer.CalculateScore(players);
+
+		// Assert
+		Assert.Equal(250, result);
+	}
+
+	[Fact]
+	public void CalculateScore_JuniorPlayer_ReturnsCorrectScore()
+	{
+		// Arrange
+		var players = new List<Player>
+		{
+			new Player { Age = 15, Experience = 3, Skills = new List<int> {3, 3, 3} }
+		};
+		var analyzer = new PlayerAnalyzer();
+
+		// Act
+		var result = analyzer.CalculateScore(players);
+
+		// Assert
+		Assert.Equal(67.5, result);
+	}
+
+	[Fact]
+	public void CalculateScore_SeniorPlayer_ReturnsCorrectScore()
+	{
+		// Arrange
+		var players = new List<Player>
+		{
+			new Player { Age = 35, Experience = 15, Skills = new List<int> {4, 4, 4} }
+		};
+		var analyzer = new PlayerAnalyzer();
+
+		// Act
+		var result = analyzer.CalculateScore(players);
+
+		// Assert
+		Assert.Equal(2520, result);
+	}
+
+	[Fact]
+	public void CalculateScore_MultiplePlayers_ReturnsCorrectScore()
+	{
+		// Arrange
+		var players = new List<Player>();
+		for (int i = 0; i < 20; i++)
+		{
+			players.Add(new Player { Age = 25, Experience = 5, Skills = new List<int> {2, 2, 2} });
+		}
+		var analyzer = new PlayerAnalyzer();
+
+		// Act
+		var result = analyzer.CalculateScore(players);
+
+		// Assert
+		Assert.Equal(5000, result); // Since each player contributes 250 and we have 20 players.
+	}
+
+	[Fact]
+	public void CalculateScore_SkillsIsNull_ThrowsException()
+	{
+		// Arrange
+		var players = new List<Player>
+		{
+			new Player { Age = 25, Experience = 5, Skills = null }
+		};
+		var analyzer = new PlayerAnalyzer();
+
+		// Act & Assert
+		Assert.Throws<InvalidOperationException>(() => analyzer.CalculateScore(players));
+	}
+
+	[Fact]
+	public void CalculateScore_EmptyArray_ReturnsZero()
+	{
+		// Arrange
+		var players = new List<Player>();
+		var analyzer = new PlayerAnalyzer();
+
+		// Act
+		var result = analyzer.CalculateScore(players);
+
+		// Assert
+		Assert.Equal(0, result);
+	}
+}
+This code covers all the scenarios you described in your test cases. Note that in the negative case where Skills is null, I've made an assumption that this should throw an InvalidOperationException. You may need to adjust this depending on the actual exception that's thrown.
+
+You can run these tests with a test runner that supports xUnit, such as the built-in test runner in Visual Studio or the dotnet test command-line tool.
+

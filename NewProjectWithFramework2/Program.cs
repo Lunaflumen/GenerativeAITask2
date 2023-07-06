@@ -1,4 +1,4 @@
-﻿namespace NewProjectWithFramework
+﻿namespace NewProjectWithFramework2
 {
 	public static class Program
 	{

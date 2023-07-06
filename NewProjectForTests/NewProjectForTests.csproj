@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NewProjectWithFramework2\NewProjectWithFramework2.csproj" />
     <ProjectReference Include="..\NewProjectWithFramework\NewProjectWithFramework.csproj" />
   </ItemGroup>
 
