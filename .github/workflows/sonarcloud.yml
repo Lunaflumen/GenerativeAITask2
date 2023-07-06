@@ -45,5 +45,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Lunaflumen_GenerativeAITask2" /o:"lunaflumen" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.xunit.reportsPaths=XUnitResults.xml
           dotnet build
-          packages\xunit.runner.console.2.1.0\tools\xunit.console.exe XUnitProject1\bin\Debug\XUnitProject1.dll -xml XUnitResults.xml
+          dotnet coverage collect "dotnet test" -f xml -o "XUnitResults.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
