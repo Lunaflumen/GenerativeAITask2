@@ -45,4 +45,8 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Lunaflumen_GenerativeAITask2" /o:"lunaflumen" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
+          dotnet build –no-incremental
+          dotnet dotcover test --dcReportType=HTML
+          dotnet sonarscanner end /d:sonar.login=<sonar-token>
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          dotnet sonarscanner begin /k:"<sonar-project-key>"
